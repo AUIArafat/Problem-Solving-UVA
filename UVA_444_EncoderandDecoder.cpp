@@ -1,37 +1,39 @@
 #include<iostream>
 #include<vector>
+#include<bits/stdc++.h>
+#include<stack>
 using namespace std;
-string Reverse(string S){string S1="";int j=0;for(int i=S.size()-1;i>=0;i--){S1= S1 + S[i];++j;}return S1;} //Reverse a String...
-int main(){
+
+void solve(){
     string S;
-    int arr[10000];
-    int Arr[10000];
-    while(1){
-        cin>>S;
-        int k=0;
-        for(int i=0;i<S.size();i++){
-            arr[i] = (int)S[i];
-        }
-        for(int i=0;i<S.size();i++){
-            if(arr[i]>=100){
-                Arr[k] = arr[i]/100;
-                int temp = (arr[i]%100)/10;
-                Arr[++k] = temp;
-                Arr[++k] = (arr[i]%100)%10;
-                ++k;
+    while(getline(cin,S)){
+        int a;
+        for (int i=S.length()-1;i>=0;i--){
+            if(!isdigit(S[i])){
+                int ch = S[i];
+                int rev=0, Rem;
+                while(ch>0){
+                    Rem = ch%10;
+                    ch = ch/10;
+                    cout<<Rem;
+                }
             }
             else{
-                Arr[k] = arr[i]/10;
-                Arr[++k] = arr[i]%10;
-                ++k;
+                if(S[i]=='1'){
+                    a = (S[i]-'0')*100 + (S[i-1]-'0')*10 + (S[i-2]-'0');
+                    i-=2;
+                }
+                else{
+                    a = (S[i]-'0')*10 + (S[i-1]-'0');
+                    i--;
+                }
+                cout<<(char)a;
             }
         }
-        for(int i=k-1;i>=0;i--){
-            cout<<Arr[i];
-        }
-        cout<<"\nPrinting reverse array..."<<endl;
-        for(int i=k-1;i>=0;i--){
-            cout<<Arr[i];
-        }
+        cout<<endl;
     }
+
+}
+int main(){
+    solve();
 }
